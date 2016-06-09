@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { createStore, compose } from 'redux';
+import { createStore, compose, combineReducers } from 'redux';
 import { Provider, connect } from 'react-redux';
 import reduxElm from 'redux-elm';
 import { browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 
 export default (containerDomId, View, updater) => {
   const storeFactory = compose(
@@ -12,16 +12,21 @@ export default (containerDomId, View, updater) => {
     window.devToolsExtension ? window.devToolsExtension() : f => f
   )(createStore);
 
-  const store = storeFactory(updater);
+  const store = storeFactory(combineReducers({
+    root: updater,
+    routing: routerReducer
+  }));
   const history = syncHistoryWithStore(browserHistory, store);
 
-  const ConnectedView = connect(appState => ({
-    model: appState
-  }))(View);
-
-  render((
+  const Component = () => (
     <Provider store={store}>
-      <ConnectedView history={history} />
+      <View
+        history={history}
+        dispatch={store.dispatch}
+      />
     </Provider>
-  ), document.getElementById(containerDomId));
+  );
+
+  render(<Component />,
+    document.getElementById(containerDomId));
 }
