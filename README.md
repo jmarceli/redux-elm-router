@@ -1,6 +1,6 @@
-# redux-elm-skeleton
+# redux-elm-router
 
-Simple [redux-elm](https://github.com/salsita/redux-elm) skeleton which facilitates starting with redux-elm while avoiding [JavaScript fatigue](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4).
+Sample app which integrates [redux-elm](https://github.com/salsita/redux-elm) with [react-router-redux](https://github.com/reactjs/react-router-redux).
 
 ## Usage
 
