@@ -6,27 +6,39 @@ import reduxElm from 'redux-elm';
 import { browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 
-export default (containerDomId, View, updater) => {
+export default (containerDomId) => {
   const storeFactory = compose(
     reduxElm,
     window.devToolsExtension ? window.devToolsExtension() : f => f
   )(createStore);
 
-  const store = storeFactory(combineReducers({
-    root: updater, // separate application model from routing
-    routing: routerReducer // add routerReducer according to the docs
-  }));
-  const history = syncHistoryWithStore(browserHistory, store);
+  let store;
 
-  const Component = () => (
-    <Provider store={store}>
-      <View
-        history={history}
-        dispatch={store.dispatch}
-      />
-    </Provider>
-  );
+  return (View, updater) => {
+    if (!store) {
+      store = storeFactory(combineReducers({
+        root: updater,
+        routing: routerReducer
+      }));
+    } else {
+      store.replaceReducer(combineReducers({
+        root: updater,
+        routing: routerReducer
+      }));
+    }
+    const history = syncHistoryWithStore(browserHistory, store);
 
-  render(<Component />,
-    document.getElementById(containerDomId));
+    //const ConnectedView = connect(appState => ({
+      //model: appState
+    //}))(View);
+
+    render((
+      <Provider store={store}>
+        <View
+          history={history}
+          dispatch={store.dispatch}
+        />
+      </Provider>
+    ), document.getElementById(containerDomId));
+  }
 }

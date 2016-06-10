@@ -1,5 +1,15 @@
-import run from './boilerplate';
-import view from './root/view';
-import updater from './root/updater';
+import boot from './boilerplate';
 
-run('app', view, updater);
+const run = boot('app');
+
+const start = () => run(
+  require('./root/view').default,
+  require('./root/updater').default
+);
+
+if (module.hot) {
+  module.hot.accept('./root/view', start);
+  module.hot.accept('./root/updater', start);
+}
+
+start();
