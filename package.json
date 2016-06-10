@@ -1,7 +1,8 @@
 {
-  "name": "redux-elm-skeleton",
+  "name": "redux-elm-router",
   "version": "0.1.0",
-  "private": true,
+  "keywords": ["redux-elm", "react-router-redux"],
+  "description": "Example of using react-router-redux with redux-elm",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server --config webpack.config.js --port 3000 --hot --content-base ./",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
@@ -36,5 +37,14 @@
     "redux-saga": "^0.10.4"
   },
   "author": "Tomas Weiss <tomasw@salsitasoft.com>",
+  "contributors": [
+    {
+      "name": "Jan Grzegorowski"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jmarceli/redux-elm-router.git"
+  },
   "license": "MIT"
 }
