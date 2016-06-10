@@ -13,8 +13,8 @@ export default (containerDomId, View, updater) => {
   )(createStore);
 
   const store = storeFactory(combineReducers({
-    root: updater,
-    routing: routerReducer
+    root: updater, // separate application model from routing
+    routing: routerReducer // add routerReducer according to the docs
   }));
   const history = syncHistoryWithStore(browserHistory, store);
 
