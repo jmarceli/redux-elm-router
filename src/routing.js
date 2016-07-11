@@ -19,13 +19,14 @@ const connectView = (View, modelKey, ...nesting) =>
     props => <View {...props} dispatch={forwardTo(props.dispatch, ...nesting)} />);
 
 // Here all the pages (routed components) gets wrapped
+const TemplateView = connectView(Template, 'template', 'Template');
 const ConnectedCounterView1 = connectView(Counter, 'counter1', 'Counter1');
 const ConnectedCounterView2 = connectView(Counter, 'counter2', 'Counter2');
 
 // this will be used inside src/root/view.js
 export default history => (
   <Router history={history}>
-    <Route path="/" component={Template}>
+    <Route path="/" component={TemplateView}>
       <IndexRoute component={ConnectedCounterView1} />
       <Route path="one" component={ConnectedCounterView1} />
       <Route path="two" component={ConnectedCounterView2} />
