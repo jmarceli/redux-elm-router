@@ -5,7 +5,7 @@ import { Router, Route, IndexRoute } from 'react-router';
 
 // import required components
 import Counter from './counter/view';
-import Template from './template';
+import Template from './template/view';
 import { Link } from 'react-router'; // just for Template component links
 
 /**

@@ -5,15 +5,18 @@ import React from 'react';
 import { Link } from 'react-router'; // just for navigation
 import { view, forwardTo } from 'redux-elm';
 
-export default view(({ children, dispatch }) => (
+export default view(({ model, dispatch, children }) => (
   <div>
     <nav>
-      <button onClick={() => dispatch({ type: 'Test' })}>Test</button>
       <Link to="/one">counter1</Link>
       <br/>
       <Link to="/two">counter2</Link>
     </nav>
     <main>
+      <div>
+        <span>This is template updater button:</span>
+        <button onClick={() => dispatch({ type: 'Test' })}>Test + {model.test}</button>
+      </div>
       {children}
     </main>
   </div>
