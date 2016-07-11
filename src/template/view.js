@@ -14,8 +14,8 @@ export default view(({ model, dispatch, children }) => (
     </nav>
     <main>
       <div>
-        <span>This is template updater button:</span>
-        <button onClick={() => dispatch({ type: 'Test' })}>Test + {model.test}</button>
+        <span>This is template updater button (it should have same value on each subpage):</span>
+        <button onClick={() => dispatch({ type: 'Test' })}>Test {model.test}</button>
       </div>
       {children}
     </main>
