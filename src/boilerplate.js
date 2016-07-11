@@ -15,22 +15,18 @@ export default (containerDomId) => {
   let store;
 
   return (View, updater) => {
-    if (!store) {
-      store = storeFactory(combineReducers({
-        root: updater,
-        routing: routerReducer
-      }));
-    } else {
-      store.replaceReducer(combineReducers({
-        root: updater,
-        routing: routerReducer
-      }));
-    }
-    const history = syncHistoryWithStore(browserHistory, store);
+    const reducers = combineReducers({
+      root: updater,
+      routing: routerReducer
+    });
 
-    //const ConnectedView = connect(appState => ({
-      //model: appState
-    //}))(View);
+    if (!store) {
+      store = storeFactory(reducers);
+    } else {
+      store.replaceReducer(reducers);
+    }
+
+    const history = syncHistoryWithStore(browserHistory, store);
 
     render((
       <Provider store={store}>
