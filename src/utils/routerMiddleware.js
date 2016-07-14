@@ -1,6 +1,6 @@
 /**
  * Custom routerMiddleware which works with Elm action types.
- * It allows to use push('/yourpath') from reat-router-redux package
+ * It allows to use push('/yourpath') from react-router-redux package
  * Example:
  *
  * dispatch(push('/'))
@@ -9,6 +9,7 @@
  *
  * yield put(push('/somewhere'));
  *
+ * Use it instead of default routerMiddleware from react-router-redux
  */
 import { CALL_HISTORY_METHOD } from 'react-router-redux';
 
