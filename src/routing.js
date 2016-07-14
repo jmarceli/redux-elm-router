@@ -27,7 +27,6 @@ const ConnectedCounterView2 = connectView(Counter, 'counter2', 'Counter2');
 export default history => (
   <Router history={history}>
     <Route path="/" component={TemplateView}>
-      <IndexRoute component={ConnectedCounterView1} />
       <Route path="one" component={ConnectedCounterView1} />
       <Route path="two" component={ConnectedCounterView2} />
     </Route>

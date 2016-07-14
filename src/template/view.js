@@ -4,10 +4,13 @@
 import React from 'react';
 import { Link } from 'react-router'; // just for navigation
 import { view, forwardTo } from 'redux-elm';
+import { push } from 'react-router-redux';
 
 export default view(({ model, dispatch, children }) => (
   <div>
     <nav>
+      <button onClick={() => dispatch(push('/'))}>Go Home</button> it will take you home using push()
+      <br/>
       <Link to="/one">counter1</Link>
       <br/>
       <Link to="/two">counter2</Link>
