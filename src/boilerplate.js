@@ -1,14 +1,18 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { createStore, compose, combineReducers } from 'redux';
+import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
 import { Provider, connect } from 'react-redux';
 import reduxElm from 'redux-elm';
 import { browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import routerMiddleware from './utils/routerMiddleware';
 
 export default (containerDomId) => {
   const storeFactory = compose(
     reduxElm,
+    applyMiddleware(
+      routerMiddleware(browserHistory)
+    ),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   )(createStore);
 
